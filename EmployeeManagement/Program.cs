@@ -13,6 +13,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
 
 builder.Services.AddScoped<IRepository<Department>,Repository<Department>>();
+builder.Services.AddScoped<IRepository<Employee>, Repository<Employee>>();
 
 builder.Services.AddCors(option => option.AddPolicy("AllowCrosOrigin", policy =>
 {
