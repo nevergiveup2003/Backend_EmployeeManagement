@@ -19,6 +19,11 @@ namespace EmployeeManagement.Controllers
         {
             return Ok(await employeeRepository.GetAll());
         }
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEmployeeList([FromRoute]int id)
+        {
+            return Ok(await employeeRepository.FindByIdAsync(id));
+        }
         [HttpPost]
         public async Task<IActionResult> AddEmployee([FromBody] Employee model)
         {
@@ -33,6 +38,7 @@ namespace EmployeeManagement.Controllers
             employee.Name = model.Name;
             employee.Email = model.Email;
             employee.Phone = model.Phone;
+            employee.DepartmentId = model.DepartmentId;
             employee.LastWorkingDate = model.LastWorkingDate;
             employee.JobTitle = model.JobTitle;
             employeeRepository.Update(employee);
