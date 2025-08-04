@@ -1,4 +1,5 @@
 ﻿using EmployeeManagement.Entity;
+using EmployeeManagement.Services;
 namespace EmployeeManagement.Data
 {
     public class DataSeedHelper
@@ -15,6 +16,23 @@ namespace EmployeeManagement.Data
                 dbContext.Employees.Add(new Employee {  Name = "Employee 2" });
                 dbContext.Employees.Add(new Employee {  Name = "Employee 3" });
             }
+            if (!dbContext.Users.Any()) {
+                var passwordHelper = new PasswordHelper();
+
+                dbContext.Users.Add(new User()
+                {
+                    Email = "admin@test.com",
+                    Password = passwordHelper.HashPassword("12345"),
+                    Role = "Admin"
+                });
+                dbContext.Users.Add(new User()
+                {
+                    Email = "epl@test.com",
+                    Password = passwordHelper.HashPassword("12345"),
+                    Role = "Employee"
+                });
+            }
+            
             dbContext.SaveChanges();
 
         }
