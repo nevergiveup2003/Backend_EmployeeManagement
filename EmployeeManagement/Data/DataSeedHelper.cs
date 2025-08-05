@@ -10,12 +10,12 @@ namespace EmployeeManagement.Data
         }
         public void InsertData()
         {
-            if (!dbContext.Employees.Any())
-            {
-                dbContext.Employees.Add(new Employee {  Name = "Employee 1" });
-                dbContext.Employees.Add(new Employee {  Name = "Employee 2" });
-                dbContext.Employees.Add(new Employee {  Name = "Employee 3" });
-            }
+            //if (!dbContext.Employees.Any())
+            //{
+            //    dbContext.Employees.Add(new Employee {  Name = "Employee 1",Phone="2334455" });
+            //    dbContext.Employees.Add(new Employee {  Name = "Employee 2", Phone = "45674" });
+            //    dbContext.Employees.Add(new Employee {  Name = "Employee 3", Phone = "36765" });
+            //}
             if (!dbContext.Users.Any()) {
                 var passwordHelper = new PasswordHelper();
 
