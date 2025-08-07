@@ -16,11 +16,13 @@ namespace EmployeeManagement.Controllers
     {
         private readonly IRepository<Leave> leaveRepo;
         private readonly UserHelper userHelper;
+        private readonly IRepository<Attendance> attendanceRepo;
 
-        public LeaveController(IRepository<Leave> leaveRepo,UserHelper userHelper)
+        public LeaveController(IRepository<Leave> leaveRepo,UserHelper userHelper, IRepository<Attendance> attendanceRepo)
         {
             this.leaveRepo = leaveRepo;
             this.userHelper = userHelper;
+            this.attendanceRepo = attendanceRepo;
         }
 
 
@@ -45,21 +47,30 @@ namespace EmployeeManagement.Controllers
         [Authorize(Roles = "Employee,Admin")]
         public async Task<IActionResult> UpdateLeaveStatus([FromBody] LeaveDto model)
         {
+            var leave = await leaveRepo.FindByIdAsync(model.Id!.Value);
+            var isAdmin = await userHelper.IsAdmin(User);
             if (model.Id == null || model.Status == null)
             {
                 return BadRequest("Thiếu Id hoặc Status.");
             }
 
-            var leave = await leaveRepo.FindByIdAsync(model.Id.Value);
             if (leave == null)
             {
                 return NotFound("Không tìm thấy đơn nghỉ phép.");
             }
 
-            var isAdmin = await userHelper.IsAdmin(User);
             if (isAdmin)
             {
                 leave.Status = model.Status.Value;
+                if(model.Status.Value == (int)LeaveStatus.Accepted)
+                {
+                    await attendanceRepo.AddAsync(new Attendance()
+                    {
+                        Date =leave.LeaveDate,
+                        EmployeeId = leave.EmployeeId,
+                        Type =(int) AttendanceType.Leave
+                    });
+                }
             }
             else
             {

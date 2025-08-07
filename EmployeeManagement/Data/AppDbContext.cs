@@ -11,5 +11,6 @@ namespace EmployeeManagement.Data
         public DbSet<Department> Departments { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Leave> Leaves { get; set; }
+        public DbSet<Attendance> Attendances { get; set; }
     }
 }

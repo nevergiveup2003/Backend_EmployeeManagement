@@ -78,11 +78,7 @@ namespace EmployeeManagement.Controllers
                     employee.Name = model.Name;
 
                 }
-                if (!string.IsNullOrEmpty(model.Email))
-                {
-                    employee.Email = model.Email;
-
-                }
+               
                 if (!string.IsNullOrEmpty(model.Phone))
                 {
                     employee.Phone = model.Phone;
@@ -90,11 +86,7 @@ namespace EmployeeManagement.Controllers
                 emRepo.Update(employee);
             }
 
-            if (!string.IsNullOrEmpty(model.Email))
-            {
-                user.Email = model.Email;
-
-            }
+           
             if (!string.IsNullOrEmpty(model.ProfileImage))
             {
                 user.ProfileImage = model.ProfileImage;
