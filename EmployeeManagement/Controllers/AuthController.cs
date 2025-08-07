@@ -111,6 +111,7 @@ namespace EmployeeManagement.Controllers
             var employee = (await emRepo.GetAll(x => x.userId == user.Id)).FirstOrDefault();
             return Ok(new ProfileDto()
             {
+                Salary = employee?.Salary,
                 Name = employee?.Name,
                 Email = user.Email,
                 Phone = employee?.Phone,

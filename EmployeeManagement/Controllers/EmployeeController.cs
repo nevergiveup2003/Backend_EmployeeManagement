@@ -81,6 +81,7 @@ namespace EmployeeManagement.Controllers
             employee.DepartmentId = model.DepartmentId;
             employee.LastWorkingDate = model.LastWorkingDate;
             employee.JobTitle = model.JobTitle;
+            employee.Salary = model.Salary;
             employeeRepository.Update(employee);
             await employeeRepository.SaveChangesAsync();
             return Ok();

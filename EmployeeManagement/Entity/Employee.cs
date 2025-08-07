@@ -19,5 +19,6 @@ namespace EmployeeManagement.Entity
 
         public int? userId { get; set; }
         public User? User { get; set; }
+        public int? Salary { get; set; }
     }
 }
